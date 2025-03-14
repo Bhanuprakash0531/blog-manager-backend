@@ -1,6 +1,6 @@
 export const getUserProfile =(req,res)=>{
-    const name=req.query.name;
-    const role =req.query.role;
+    const name=req.query.name || 'Bhanu';
+    const role =req.query.role || 'Student';
     if(name && role){
         return res.json({name:`${name}`, role:`${role}`});
     }else if(name){

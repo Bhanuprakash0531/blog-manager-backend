@@ -7,10 +7,13 @@ import { getUserProfile } from './controllers/profileController.js';
 import { greetUser } from './controllers/greetController.js';
 import { getBlogList } from './controllers/blogListController.js';
 import { createBlogPost } from './controllers/blogController.js';
-
+import cors from 'cors';
+ 
 import express from 'express';
 const app= express();
 app.use(express.json());
+//const cors=require('cors');
+app.use((cors()));
 
 app.get('/api/greet',greetUser);
 app.get('/api/profile',getUserProfile);
