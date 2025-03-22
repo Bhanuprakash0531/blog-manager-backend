@@ -1,7 +1,11 @@
-export const getBlogList=(req,res)=>{
-    const dummyBlogPosts=[{title:'My First Poet',body:'Hello WORLD'},
-        {title:'Another Post',body:'This is second world.....'}
-    ];
-  return res.json({dummyBlogPosts});
+import pool from '../db.js';
+
+export const getBlogList=async(req,res)=>{
+  try{
+    const result =await pool.query('SELECT * FROM blogs ORDER BY created_at DESC');
+    res.json({'dummyBlogPosts':result.rows});
+  }catch(error){
+    res.status(500).json({error:'Failed to fetch products'});
+  }
 }
 //module.exports ={getBlogList};
