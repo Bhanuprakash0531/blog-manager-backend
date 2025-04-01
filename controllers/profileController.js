@@ -1,18 +1,14 @@
 import pool from '../db.js';
 
 export const getUserProfile = async(req,res)=>{
-    const userId = 1;
+   // const userId = 1;
+    const {email}= req.body;
     try{
-    if(userId){
-        console.log('start of the get user profile')
-        const result =await pool.query(`SELECT name, email FROM users WHERE id=$1` ,
-            [userId]
-        );
-        if(result.rows.length ===0){
-            res.status(404).json({error:'No user found'}) 
-        }
-        res.json(result.rows[0]);
+    if(!email){
+        return res.status(400).json({error: 'Email is required'});
     }
+    const result=await pool.query('SELECT * FROM users WHERE email=$1',[email]);
+    res.json(result.rows[0]);
     }catch(error){
         res.status(500).json({error:'Failed to fetch the result'});
     }

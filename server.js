@@ -8,19 +8,19 @@ import { greetUser } from './controllers/greetController.js';
 import { getBlogList } from './controllers/blogListController.js';
 import { createBlogPost } from './controllers/blogController.js';
 import cors from 'cors';
- 
+
 import express from 'express';
-const app= express();
+const app = express();
 app.use(express.json());
 //const cors=require('cors');
 app.use((cors()));
 
-app.get('/api/greet',greetUser);
-app.get('/api/profile',getUserProfile);
-app.get('/api/blog-list',getBlogList);
-app.post('/api/blog-post',createBlogPost);
+app.get('/api/greet', greetUser);
+app.post('/api/profile', getUserProfile);
+app.get('/api/blog-list', getBlogList);
+app.post('/api/blog-post', createBlogPost);
 
-app.listen(3001,()=>console.log("server listening on port 3001"));
+app.listen(3001, () => console.log("server listening on port 3001"));
 
 
 
@@ -131,7 +131,13 @@ const server= http.createServer((req, res)=>{
     }
     if (parsedUrl.pathname ==='/api/greeting' && req.method=='GET'){
         const name=parsedUrl.query.name;
-        const message =name ? `hello, ${name}`: 'Hello there!';
+         =name ?
+        if(name){
+        const message=`hello, ${name}`: 'Hello there!';
+        }else{
+          message= 'Hello anonymous';
+        }
+         
         res.statusCode=200;
         res.setHeader('content-type','application/json');
         res.end(JSON.stringify({message}));
@@ -217,3 +223,6 @@ const PORT = 3001;
 server.listen(PORT,()=>{
     console.log(`Server running at http://localhost:${PORT}/`);
 });*/
+
+
+
